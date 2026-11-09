@@ -27,7 +27,7 @@ listed in `scripts/build_panel_b.py`.
 ## How to run
 ```bash
 pip install -r requirements.txt
-bash run_all.sh            # paper settings: 200 bootstrap replications for scores, 2,000 for the second stage (several hours)
+bash run_all.sh            # paper settings: 2,000 bootstrap replications for scores and for the second stage (about 2 hours on 2 cores; faster with more)
 bash run_all.sh --quick    # fast check (~3 minutes); DEA scores identical, bootstrap results approximate
 ```
 Output is written to `results/`. The results reported in the paper are in `results_paper/`

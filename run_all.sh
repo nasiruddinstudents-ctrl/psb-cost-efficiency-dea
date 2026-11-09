@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 OUT=results; mkdir -p $OUT
-B_SCORES=200; B_STAGE2=2000; SPLITS=20; K=10
+B_SCORES=2000; B_STAGE2=2000; SPLITS=20; K=10
 if [[ "${1:-}" == "--quick" ]]; then B_SCORES=20; B_STAGE2=50; SPLITS=3; K=3; fi
 python3 scripts/parse.py data/raw $OUT                 # 1. read the six RBI tables
 python3 scripts/build_panel_b.py $OUT                  # 2. public + private panel, real 2011-12 prices

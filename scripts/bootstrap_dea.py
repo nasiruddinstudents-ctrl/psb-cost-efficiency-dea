@@ -36,8 +36,11 @@ def rep(b):
     XR = front * dd[:,None]                                       # pseudo-sample inputs
     return np.array([te(X[o], Y[o], XR) for o in range(n)]), np.array([cemin(o, XR) for o in range(n)])
 if __name__ == '__main__':
-    with Pool(2) as pool:
-        out = pool.map(rep, range(B))
+    with Pool(int(__import__("os").cpu_count())) as pool:
+        out = []
+        for i, o in enumerate(pool.imap(rep, range(B), chunksize=5), 1):
+            out.append(o)
+            if i % 50 == 0: print(f'{i}/{B} replications', flush=True)
     T = np.array([o[0] for o in out]); Cs = np.array([o[1] for o in out])  # B x n (Farrell scale)
     np.save(f'{D}/boot_TE.npy', T); np.save(f'{D}/boot_CE.npy', Cs)
     res = pd.DataFrame({'dmu': r.dmu})
