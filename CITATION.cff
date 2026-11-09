@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below."
+title: "Replication code: Volume versus Value — Cost Efficiency of Indian Public Sector Banks on a Common Frontier with Private Banks, 2009–2023"
+authors:
+  - family-names: Uddin
+    given-names: Mohammad Nasir
+    orcid: "https://orcid.org/0009-0009-0990-4616"
+    affiliation: "Westcliff University"
+repository-code: "https://github.com/nasiruddinstudents-ctrl/psb-cost-efficiency-dea"
+license: MIT
+date-released: 2026-11-09
