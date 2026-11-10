@@ -49,12 +49,17 @@ Output is written to `results/`. The results reported in the paper are in `resul
 | 10 | `stage2.py` – second stage, models M1–M4 | Table 13 |
 | 10b | `audit_checks.py` – sequential (no look-ahead) frontier, net-NPA DDF, bank-level Type I/II tests, full vs exclusion sample, cost reconciliation | Tables 7, Sections 6.2, 6.9 |
 | 10c | `stage2_bankboot.py` – bank-level (cluster) bootstrap of M1–M2 | Table 14 |
+| 10d | `bank_bootstrap_frontier.py` – bank-level bootstrap of PSB − private gaps with the frontier re-estimated in each resample | Table 7, Section 6.4 |
+| 10e | `audit_checks2.py` – Type I/II identities, capital-price winsorising, DDF direction, conditional bandwidths, leave-one-bank-out metafrontier, sample accounting | Sections 6.7, 6.9; Table A2 |
 | 11 | `tables.py` – summary tables and workbook | Table 4, A1 |
 | 12 | `make_figure.py` | Figure 1 |
 
 Linear programmes are solved with SciPy's HiGHS solver. Random seeds are fixed in each script.
 
+Tested environment: Python 3.13.18, numpy 2.5.3, pandas 3.0.5, scipy 1.18.1, statsmodels 0.15.0, openpyxl 3.1.5, matplotlib 3.11.2. Means in the paper weight bank-years equally unless stated; Mann–Whitney tests treat bank-years as independent and are descriptive, while bank-level bootstrap intervals (10c, 10d) treat banks as the sampling unit.
+
 ## Data checks
+- Type I/II identities: CE = TE × AE holds under both decompositions (max error 3e-16) and CE ≤ TE(II) ≤ TE(I) for all 646 bank-years (`audit_checks2.py`).
 - Cost reconciliation: for every bank-year, Σ (input quantity × input price) equals interest expended + operating expenses (checked in `dea.py` and `audit_checks.py`).
 - Bank names are taken from the RBI tables; RBI footnote markers (*, #, @) on merged or reclassified banks are stripped in `parse.py`.
 - Ownership is RBI's bank-group label in each year (IDBI Bank: PSB to 2018, private from 2019). Bharatiya Mahila Bank is excluded (incomplete data); bank-years with missing or non-positive inputs/outputs are dropped and listed by `build_panel_b.py`.
