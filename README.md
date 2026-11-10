@@ -43,13 +43,21 @@ Output is written to `results/`. The results reported in the paper are in `resul
 | 5 | `robustness.py` – PSB-only frontier, outliers, 12 surviving PSBs | Section 6.9, Table 8 |
 | 6 | `robust_income_outputs.py` – income-based outputs | Section 6.4, Figure 1b |
 | 7 | `bootstrap_dea.py` – Simar & Wilson (1998) bootstrap | Table 4 |
-| 8 | `separability.py` – Daraio, Simar & Wilson (2018) test | Table 10 |
+| 8 | `separability.py` – Daraio, Simar & Wilson (2018) test, bank-year splits | Table 10 (right) |
+| 8b | `separability_bankblocked.py` – same test, halves formed by banks (main) | Table 10 (left) |
 | 9 | `conditional.py` – conditional efficiency, cost metafrontier | Tables 11–12 |
 | 10 | `stage2.py` – second stage, models M1–M4 | Table 13 |
+| 10b | `audit_checks.py` – sequential (no look-ahead) frontier, net-NPA DDF, bank-level Type I/II tests, full vs exclusion sample, cost reconciliation | Tables 7, Sections 6.2, 6.9 |
+| 10c | `stage2_bankboot.py` – bank-level (cluster) bootstrap of M1–M2 | Table 14 |
 | 11 | `tables.py` – summary tables and workbook | Table 4, A1 |
 | 12 | `make_figure.py` | Figure 1 |
 
 Linear programmes are solved with SciPy's HiGHS solver. Random seeds are fixed in each script.
+
+## Data checks
+- Cost reconciliation: for every bank-year, Σ (input quantity × input price) equals interest expended + operating expenses (checked in `dea.py` and `audit_checks.py`).
+- Bank names are taken from the RBI tables; RBI footnote markers (*, #, @) on merged or reclassified banks are stripped in `parse.py`.
+- Ownership is RBI's bank-group label in each year (IDBI Bank: PSB to 2018, private from 2019). Bharatiya Mahila Bank is excluded (incomplete data); bank-years with missing or non-positive inputs/outputs are dropped and listed by `build_panel_b.py`.
 
 ## Citation
 See `CITATION.cff`. Licence: MIT (code). The RBI data remain subject to the RBI's terms of use.
