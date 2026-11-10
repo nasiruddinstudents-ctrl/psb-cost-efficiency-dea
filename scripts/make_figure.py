@@ -4,7 +4,7 @@ D = sys.argv[1]
 r = pd.read_csv(f'{D}/dea_scores.csv').merge(pd.read_csv(f'{D}/robust_income_outputs.csv'), on='dmu')
 C = {'PSB':'#2a78d6','PVT':'#eb6834'}; M = {'PSB':'o','PVT':'s'}; N = {'PSB':'Public sector banks','PVT':'Private sector banks'}
 fig, ax = plt.subplots(1, 2, figsize=(10, 3.8), dpi=300)
-for a, col, tt in [(ax[0],'CE_vrs','(a) Intermediation outputs (main)'), (ax[1],'CE_income_outputs','(b) Income-based outputs (robustness)')]:
+for a, col, tt in [(ax[0],'CE_vrs','(a) Balance-sheet-output model'), (ax[1],'CE_income_outputs','(b) Income-output model')]:
     m = r.groupby(['year','ownership'])[col].mean().unstack()
     for o in ['PSB','PVT']: a.plot(m.index, m[o], color=C[o], lw=2, marker=M[o], ms=5, label=N[o])
     a.axvspan(2015.5, 2020.5, color='#e9e8e4', zorder=0)
